@@ -2,6 +2,10 @@
 # filename: NoSQL_setup_starter.ipynb
 ## <ins>Part 1: Database and Jupyter Notebook Set Up</ins></br>
 > - I used the terminal to import the establishments.json file from the repository Resources folder with the command ***"mongoimport --type json -d uk_food -c establishments --drop --jsonArray establishments.json"*** to be used as the dataset<br>
+> > - The "--type" json command ensures that the code knows what the format of the file I am importing is so it loads correctly<br>
+> > - The "-d uk_food" command creates a database named uk_food with the data from the json file stored within it<br>
+> > - The "-c establishments" command creates a collection called establishments which contains the data from the json file we imported<br>
+> > - The "--drop --jsonArray establishments.json" command ensures that if there is an existing loaded collection named establishments, it is removed from the database so as not to create duplicate data or corrupt the collection<br>
 > - I then created the uk_food database and establishments collection from this data and assigned them to Python variables to analyze the data
 > - I used the find_one function to make sure the data loaded correctly and then assigned the collection to a varaible<br>
 
@@ -26,9 +30,10 @@
   ![image](https://github.com/user-attachments/assets/f7030f68-cd26-48d5-b876-32e2a195b5d9)
   ![image](https://github.com/user-attachments/assets/8bbbb322-14d5-4456-9ed1-19f9b2cc0ac7)
   
-> - I then use update_many to convert all RatingValue fields from string to Integer as well as changing all non 1-5 ratings to Null for the entire dataset
+> - I then use update_many to convert all RatingValue fields from string to Integer as well as changing all non 1-5 ratings to Null for the entire dataset.  I used code to data validate for any fields that are empty or Null in the results to make sure the calculation can take place properly
 
-  ![image](https://github.com/user-attachments/assets/ec0ffcd7-ac67-4c0b-947f-8c3901668d9d)
+  ![image](https://github.com/user-attachments/assets/a2ec6b42-ee13-400f-8785-6e2f72e2f928)
+
 
 > - Finally, I use queries to test the type() of the latitude, longitude, and RatinGValue fields to make sure the datatype properly updated
 
@@ -49,8 +54,9 @@
 
 ### 2. Which establishments in London have a `RatingValue` greater than or equal to 4?</br></br> <ins><strong>*Answer: 33*</ins></strong>
 > - I used a find query to find all documents with a RatingValue greater than or equal to 4 and a count_documents() function to get the number of documents that meet this criteria
+> - I used a very specified form of the regex function to get accurate results and capture all unique names and edge cases
 
-  ![image](https://github.com/user-attachments/assets/947f99c2-a293-4cc3-97b2-0fc719cf0c28)
+  ![image](https://github.com/user-attachments/assets/3e90de0a-aaaf-46f9-8301-0ec59e341449)
 
 > - I then turned this result into a Dataframe with db.DataFrame() and displayed the first 10 rows
 
@@ -62,6 +68,10 @@
 > - I created a query with a Rating Value of 5, find all documents between latitude and longitude minus 0.01 and latitude and longitude plus 0.01 to find the locations closest to the new restaurant
 > - I set up a sort() function to sort by the Hygiene scores in the results.
 > - I took the query and sort variables that I created and created a new query to show 5 of the results that meet thsi criteria
+> - I used geospacial commands to make sure that the latitude and longitude aren't hardcoded and it is a dynamic search for restaurants within 0.01 degrees of Penang Flavours
+
+  ![image](https://github.com/user-attachments/assets/98bef081-b34c-4dbf-ac82-1b38ec4bc53a)
+
 
   ![image](https://github.com/user-attachments/assets/852f67f7-ea0c-4086-b987-aa8d31c237fb)
 
